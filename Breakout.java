@@ -39,6 +39,7 @@ public class Breakout extends GraphicsProgram {
 		addMouseListeners();
 	}
 
+	/* Run loop */
 	public void run() {
 
 		// waitForClick();
@@ -50,13 +51,9 @@ public class Breakout extends GraphicsProgram {
 
 	}
 
-	/* Called on mouse drag to reposition the object */
+	/* Called on mouse move to reposition the paddle */
 	public void mouseMoved(MouseEvent e) {
 		thePaddle.setLocation(e.getX());
-	}
-
-	public void mouseClicked(MouseEvent e) {
-		System.out.println("miss!" + theBall);
 	}
 
 	public void updateBricks() {
