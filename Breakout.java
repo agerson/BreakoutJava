@@ -13,7 +13,7 @@ import java.awt.event.*;
 public class Breakout extends GraphicsProgram {
 
 	private static final int PAUSE_TIME = 15;
-	
+
 	private static final int BRICKS_PER_ROW = 10;
 	private static final int BRICKS_NUMBER_OF_ROWS = 3;
 	private static final int BRICK_WIDTH = 60;
@@ -33,7 +33,7 @@ public class Breakout extends GraphicsProgram {
 		add(theBall.getShape());
 
 		for (int i = 0; i < BRICKS_PER_ROW; i++) {
-			theBricks[0][i] = new Brick((62 * i) + 1, 5, BRICK_WIDTH, 25);
+			theBricks[0][i] = new Brick((62 * i) + 1, 5);
 			// System.out.println((30*i)+5);
 			add(theBricks[0][i].getShape());
 		}
@@ -45,6 +45,7 @@ public class Breakout extends GraphicsProgram {
 		// waitForClick();
 		while (true) {
 			updateBall();
+			updateBricks();
 			pause(PAUSE_TIME);
 		}
 
@@ -57,6 +58,14 @@ public class Breakout extends GraphicsProgram {
 
 	public void mouseClicked(MouseEvent e) {
 		System.out.println("miss!" + theBall);
+	}
+
+	public void updateBricks() {
+		for (int i = 0; i < BRICKS_PER_ROW; i++) {
+			if (!theBricks[0][i].isAlive()) {
+				remove(theBricks[0][i].getShape());
+			}
+		}
 	}
 
 	public void updateBall() {
@@ -83,17 +92,15 @@ public class Breakout extends GraphicsProgram {
 			System.out.println("Paddle hit");
 			theBall.bounceY();
 		}
-		
+
 		// Check bricks
 		for (int i = 0; i < BRICKS_PER_ROW; i++) {
 			if (theBall.intersects(theBricks[0][i])) {
 				System.out.println("Brick hit");
+				theBricks[0][i].setAlive(false);
 				theBall.bounceY();
 			}
 		}
-		
-		
-		
 
 	}
 
