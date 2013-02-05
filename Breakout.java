@@ -16,7 +16,7 @@ public class Breakout extends GraphicsProgram {
 	private Ball theBall;
 	private Brick[][] theBricks = new Brick[3][10];
 	
-	private static final double PAUSE_TIME = 20;
+	private static final double PAUSE_TIME = 10;
 
 
 	boolean gameOver = false;
@@ -71,10 +71,7 @@ public class Breakout extends GraphicsProgram {
 		}
 		
 		//Check paddle
-		GRectangle ballBoundingBox = theBall.getShape().getBounds();
-		GRectangle paddleBoundingBox = thePaddle.getShape().getBounds();
-
-		if (ballBoundingBox.intersects(paddleBoundingBox)) {
+		if (theBall.intersects(thePaddle)) {
 			System.out.println("bam!");
 			theBall.bounceY();
 		}

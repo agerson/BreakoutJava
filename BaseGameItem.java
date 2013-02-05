@@ -1,7 +1,7 @@
 import java.awt.Color;
 import acm.graphics.GObject;
 import acm.graphics.GRect;
-
+import acm.graphics.GRectangle;
 
 public class BaseGameItem {
 
@@ -55,6 +55,17 @@ public class BaseGameItem {
 
 	public void setShape(GObject shape) {
 		this.shape = shape;
+	}
+
+	public boolean intersects(BaseGameItem aGameItem) {
+		GRectangle myBoundingBox = this.getShape().getBounds();
+		GRectangle aGameItemBoundingBox = aGameItem.getShape().getBounds();
+
+		if (myBoundingBox.intersects(aGameItemBoundingBox)) {
+			return true;
+		} else {
+			return false;
+		}
 	}
 
 	@Override
