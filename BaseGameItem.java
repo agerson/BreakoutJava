@@ -1,8 +1,7 @@
 import java.awt.Color;
-
 import acm.graphics.GObject;
 import acm.graphics.GRect;
-import acm.graphics.GRectangle;
+
 
 public class BaseGameItem {
 

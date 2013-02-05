@@ -1,15 +1,12 @@
 /*
- * File: DragObjects.java
+ * File: Breakout.java
  * ----------------------
- * This program displays two objects -- a red rectangle and
- * a green oval -- and then allows the user to drag those
- * objects using the mouse.  Clicking on an object moves it
- * to the front.
+ * This program creates the classic "Breakout" game in Java
+ * 
  */
 
 import acm.graphics.*;
 import acm.program.*;
-import java.awt.*;
 import java.awt.event.*;
 
 /** This class displays a mouse-draggable rectangle and oval */
