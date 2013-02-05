@@ -25,7 +25,7 @@ public class BaseGameItem {
 		this.height = height;
 		GRect rect = new GRect(xpos, ypos, width, height);
 		rect.setColor(Color.BLUE);
-		rect.setFilled(true);
+		//rect.setFilled(true);
 		setShape(rect);
 	}
 
@@ -33,6 +33,23 @@ public class BaseGameItem {
 		shape.setLocation(this.xpos, this.ypos);
 	}
 
+	public boolean intersects(BaseGameItem aGameItem) {
+		GRectangle myBoundingBox = this.getShape().getBounds();
+		GRectangle aGameItemBoundingBox = aGameItem.getShape().getBounds();
+
+		if (myBoundingBox.intersects(aGameItemBoundingBox)) {
+			return true;
+		} else {
+			return false;
+		}
+	}
+
+	@Override
+	public String toString() {
+		return "BaseGameItem [xpos=" + xpos + ", ypos=" + ypos + "]";
+	}
+	
+	//Accessors
 	public int getXpos() {
 		return xpos;
 	}
@@ -55,21 +72,5 @@ public class BaseGameItem {
 
 	public void setShape(GObject shape) {
 		this.shape = shape;
-	}
-
-	public boolean intersects(BaseGameItem aGameItem) {
-		GRectangle myBoundingBox = this.getShape().getBounds();
-		GRectangle aGameItemBoundingBox = aGameItem.getShape().getBounds();
-
-		if (myBoundingBox.intersects(aGameItemBoundingBox)) {
-			return true;
-		} else {
-			return false;
-		}
-	}
-
-	@Override
-	public String toString() {
-		return "BaseGameItem [xpos=" + xpos + ", ypos=" + ypos + "]";
 	}
 }

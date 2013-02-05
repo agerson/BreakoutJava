@@ -1,34 +1,42 @@
 /*
  * File: Breakout.java
  * ----------------------
- * This program creates the classic "Breakout" game in Java
+ * This program creates the classic "Breakout" game in Java.
+ * By Adam Gerson 2013
  * 
  */
 
-import acm.graphics.*;
 import acm.program.*;
 import java.awt.event.*;
 
-/** This class displays a mouse-draggable rectangle and oval */
+/** This class is the main class of the game. */
 public class Breakout extends GraphicsProgram {
+
+	private static final int PAUSE_TIME = 15;
+	
+	private static final int BRICKS_PER_ROW = 10;
+	private static final int BRICKS_NUMBER_OF_ROWS = 3;
+	private static final int BRICK_WIDTH = 60;
 
 	private Paddle thePaddle;
 	private Ball theBall;
-	private Brick[][] theBricks = new Brick[3][10];
-	
-	private static final double PAUSE_TIME = 10;
-
+	private Brick[][] theBricks = new Brick[BRICKS_NUMBER_OF_ROWS][BRICKS_PER_ROW];
 
 	boolean gameOver = false;
-	
+
 	/* Initializes the program */
 	public void init() {
 		thePaddle = new Paddle();
 		theBall = new Ball();
-		theBricks[0][0] = new Brick(0,0,50,20);
+
 		add(thePaddle.getShape());
 		add(theBall.getShape());
-		add(theBricks[0][0].getShape());
+
+		for (int i = 0; i < BRICKS_PER_ROW; i++) {
+			theBricks[0][i] = new Brick((62 * i) + 1, 5, BRICK_WIDTH, 25);
+			// System.out.println((30*i)+5);
+			add(theBricks[0][i].getShape());
+		}
 		addMouseListeners();
 	}
 
@@ -67,19 +75,34 @@ public class Breakout extends GraphicsProgram {
 
 		// Check for game over
 		if (theBall.getYpos() > getHeight()) {
-			//TO DO: game over
+			// TO DO: game over
 		}
-		
-		//Check paddle
+
+		// Check paddle
 		if (theBall.intersects(thePaddle)) {
-			System.out.println("bam!");
+			System.out.println("Paddle hit");
 			theBall.bounceY();
 		}
+		
+		// Check bricks
+		for (int i = 0; i < BRICKS_PER_ROW; i++) {
+			if (theBall.intersects(theBricks[0][i])) {
+				System.out.println("Brick hit");
+				theBall.bounceY();
+			}
+		}
+		
+		
+		
 
 	}
 
 	public void playBounceSound() {
 		java.awt.Toolkit.getDefaultToolkit().beep();
+	}
+
+	public void p(String s) {
+		System.out.println(s);
 	}
 
 }
