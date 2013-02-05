@@ -16,7 +16,6 @@ public class Breakout extends GraphicsProgram {
 
 	private static final int BRICKS_PER_ROW = 10;
 	private static final int BRICKS_NUMBER_OF_ROWS = 3;
-	private static final int BRICK_WIDTH = 60;
 
 	private Paddle thePaddle;
 	private Ball theBall;
