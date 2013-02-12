@@ -1,6 +1,4 @@
-import java.awt.Color;
 import acm.graphics.GObject;
-import acm.graphics.GRect;
 import acm.graphics.GRectangle;
 
 public class BaseGameItem {
@@ -23,10 +21,6 @@ public class BaseGameItem {
 		this.ypos = ypos;
 		this.width = width;
 		this.height = height;
-		GRect rect = new GRect(xpos, ypos, width, height);
-		rect.setColor(Color.BLUE);
-		//rect.setFilled(true);
-		setShape(rect);
 	}
 
 	public void setLocation() {
@@ -65,7 +59,13 @@ public class BaseGameItem {
 	public void setYpos(int ypos) {
 		this.ypos = ypos;
 	}
+	public int getWidth() {
+		return width;
+	}
 
+	public int getHeight() {
+		return height;
+	}
 	public GObject getShape() {
 		return shape;
 	}

@@ -7,6 +7,8 @@
  */
 
 import acm.program.*;
+
+import java.awt.Color;
 import java.awt.event.*;
 
 /** This class is the main class of the game. */
@@ -31,10 +33,11 @@ public class Breakout extends GraphicsProgram {
 		add(thePaddle.getShape());
 		add(theBall.getShape());
 
-		for (int i = 0; i < BRICKS_PER_ROW; i++) {
-			theBricks[0][i] = new Brick((62 * i) + 1, 5);
-			// System.out.println((30*i)+5);
-			add(theBricks[0][i].getShape());
+		for (int i = 0; i < BRICKS_NUMBER_OF_ROWS; i++) {
+			for (int ii = 0; ii < BRICKS_PER_ROW; ii++) {
+				theBricks[i][ii] = new Brick((62 * ii) + 1, (20*i)+5, getColorForBricks(i));
+				add(theBricks[i][ii].getShape());
+			}
 		}
 		addMouseListeners();
 	}
@@ -45,7 +48,7 @@ public class Breakout extends GraphicsProgram {
 		// waitForClick();
 		while (true) {
 			updateBall();
-			updateBricks();
+			//updateBricks();
 			pause(PAUSE_TIME);
 		}
 
@@ -57,9 +60,11 @@ public class Breakout extends GraphicsProgram {
 	}
 
 	public void updateBricks() {
-		for (int i = 0; i < BRICKS_PER_ROW; i++) {
-			if (!theBricks[0][i].isAlive()) {
-				remove(theBricks[0][i].getShape());
+		for (int i = 0; i < BRICKS_NUMBER_OF_ROWS; i++) {
+			for (int ii = 0; ii < BRICKS_PER_ROW; ii++) {
+				if (!theBricks[i][ii].isAlive()) {
+					remove(theBricks[i][ii].getShape());
+				}
 			}
 		}
 	}
@@ -85,16 +90,21 @@ public class Breakout extends GraphicsProgram {
 
 		// Check paddle
 		if (theBall.intersects(thePaddle)) {
-			System.out.println("Paddle hit");
+			//System.out.println("Paddle hit");
 			theBall.bounceY();
 		}
 
 		// Check bricks
-		for (int i = 0; i < BRICKS_PER_ROW; i++) {
-			if (theBall.intersects(theBricks[0][i]) && theBricks[0][i].isAlive()) {
-				System.out.println("Brick hit");
-				theBricks[0][i].setAlive(false);
-				theBall.bounceY();
+		for (int i = 0; i < BRICKS_NUMBER_OF_ROWS; i++) {
+			for (int ii = 0; ii < BRICKS_PER_ROW; ii++) {
+				if (theBall.intersects(theBricks[i][ii])
+						&& theBricks[i][ii].isAlive()) {
+					System.out.println("Brick hit");
+					theBricks[i][ii].setAlive(false);
+					remove(theBricks[i][ii].getShape());
+					theBall.bounceY();
+					break; //Prevents a hit of more than one brick at a time.
+				}
 			}
 		}
 
@@ -106,6 +116,16 @@ public class Breakout extends GraphicsProgram {
 
 	public void p(String s) {
 		System.out.println(s);
+	}
+	
+	public Color getColorForBricks(int row) {
+		switch (row) {
+        case 0:  return Color.green;
+        case 1:  return Color.red;
+        case 2:  return Color.MAGENTA;
+    }
+		return null;
+		
 	}
 
 }
