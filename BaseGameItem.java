@@ -42,8 +42,8 @@ public class BaseGameItem {
 	public String toString() {
 		return "BaseGameItem [xpos=" + xpos + ", ypos=" + ypos + "]";
 	}
-	
-	//Accessors
+
+	// Accessors
 	public int getXpos() {
 		return xpos;
 	}
@@ -59,6 +59,7 @@ public class BaseGameItem {
 	public void setYpos(int ypos) {
 		this.ypos = ypos;
 	}
+
 	public int getWidth() {
 		return width;
 	}
@@ -66,6 +67,7 @@ public class BaseGameItem {
 	public int getHeight() {
 		return height;
 	}
+
 	public GObject getShape() {
 		return shape;
 	}

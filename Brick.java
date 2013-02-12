@@ -13,8 +13,8 @@ public class Brick extends BaseGameItem {
 		rect.setFilled(true);
 		setShape(rect);
 	}
-	
-	//Accessors
+
+	// Accessors
 	public boolean isAlive() {
 		return isAlive;
 	}

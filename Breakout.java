@@ -35,7 +35,8 @@ public class Breakout extends GraphicsProgram {
 
 		for (int i = 0; i < BRICKS_NUMBER_OF_ROWS; i++) {
 			for (int ii = 0; ii < BRICKS_PER_ROW; ii++) {
-				theBricks[i][ii] = new Brick((62 * ii) + 1, (20*i)+5, getColorForBricks(i));
+				theBricks[i][ii] = new Brick((62 * ii) + 1, (20 * i) + 5,
+						getColorForBricks(i));
 				add(theBricks[i][ii].getShape());
 			}
 		}
@@ -48,7 +49,7 @@ public class Breakout extends GraphicsProgram {
 		// waitForClick();
 		while (true) {
 			updateBall();
-			//updateBricks();
+			// updateBricks();
 			pause(PAUSE_TIME);
 		}
 
@@ -70,11 +71,14 @@ public class Breakout extends GraphicsProgram {
 	}
 
 	public void updateBall() {
+		// System.out.println(thePaddle.getXpos());
+
 		// System.out.println(theBall);
 		theBall.updatePosition();
 
 		// Check horizontal edges
-		if (theBall.getXpos() > getWidth() - theBall.getWidth() || theBall.getXpos() < 0) {
+		if (theBall.getXpos() > getWidth() - theBall.getWidth()
+				|| theBall.getXpos() < 0) {
 			theBall.bounceX();
 		}
 
@@ -90,7 +94,10 @@ public class Breakout extends GraphicsProgram {
 
 		// Check paddle
 		if (theBall.intersects(thePaddle)) {
-			//System.out.println("Paddle hit");
+
+			int xspeed = thePaddle.calculateXspeedFromImpactZone(theBall
+					.getXpos());
+			theBall.setXspeed(xspeed);
 			theBall.bounceY();
 		}
 
@@ -99,11 +106,11 @@ public class Breakout extends GraphicsProgram {
 			for (int ii = 0; ii < BRICKS_PER_ROW; ii++) {
 				if (theBall.intersects(theBricks[i][ii])
 						&& theBricks[i][ii].isAlive()) {
-					System.out.println("Brick hit");
+					// System.out.println("Brick hit");
 					theBricks[i][ii].setAlive(false);
 					remove(theBricks[i][ii].getShape());
 					theBall.bounceY();
-					break; //Prevents a hit of more than one brick at a time.
+					break; // Prevents a hit of more than one brick at a time.
 				}
 			}
 		}
@@ -117,16 +124,20 @@ public class Breakout extends GraphicsProgram {
 	public void p(String s) {
 		System.out.println(s);
 	}
-	
+
 	public Color getColorForBricks(int row) {
 		switch (row) {
-        case 0:  return Color.GREEN;
-        case 1:  return Color.RED;
-        case 2:  return Color.BLUE;
-        case 3:  return Color.ORANGE;
-    }
+		case 0:
+			return Color.GREEN;
+		case 1:
+			return Color.RED;
+		case 2:
+			return Color.BLUE;
+		case 3:
+			return Color.ORANGE;
+		}
 		return null;
-		
+
 	}
 
 }
