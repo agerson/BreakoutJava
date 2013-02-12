@@ -14,7 +14,7 @@ public class Breakout extends GraphicsProgram {
 
 	private static final int PAUSE_TIME = 15;
 
-	private static final int BRICKS_PER_ROW = 10;
+	private static final int BRICKS_PER_ROW = 11;
 	private static final int BRICKS_NUMBER_OF_ROWS = 3;
 
 	private Paddle thePaddle;
@@ -91,7 +91,7 @@ public class Breakout extends GraphicsProgram {
 
 		// Check bricks
 		for (int i = 0; i < BRICKS_PER_ROW; i++) {
-			if (theBall.intersects(theBricks[0][i])) {
+			if (theBall.intersects(theBricks[0][i]) && theBricks[0][i].isAlive()) {
 				System.out.println("Brick hit");
 				theBricks[0][i].setAlive(false);
 				theBall.bounceY();
