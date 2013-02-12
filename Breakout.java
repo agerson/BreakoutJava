@@ -17,7 +17,7 @@ public class Breakout extends GraphicsProgram {
 	private static final int PAUSE_TIME = 15;
 
 	private static final int BRICKS_PER_ROW = 11;
-	private static final int BRICKS_NUMBER_OF_ROWS = 3;
+	private static final int BRICKS_NUMBER_OF_ROWS = 4;
 
 	private Paddle thePaddle;
 	private Ball theBall;
@@ -74,7 +74,7 @@ public class Breakout extends GraphicsProgram {
 		theBall.updatePosition();
 
 		// Check horizontal edges
-		if (theBall.getXpos() > getWidth() || theBall.getXpos() < 0) {
+		if (theBall.getXpos() > getWidth() - theBall.getWidth() || theBall.getXpos() < 0) {
 			theBall.bounceX();
 		}
 
@@ -120,9 +120,10 @@ public class Breakout extends GraphicsProgram {
 	
 	public Color getColorForBricks(int row) {
 		switch (row) {
-        case 0:  return Color.green;
-        case 1:  return Color.red;
-        case 2:  return Color.MAGENTA;
+        case 0:  return Color.GREEN;
+        case 1:  return Color.RED;
+        case 2:  return Color.BLUE;
+        case 3:  return Color.ORANGE;
     }
 		return null;
 		
