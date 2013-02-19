@@ -7,7 +7,6 @@
  */
 
 import acm.program.*;
-
 import java.awt.Color;
 import java.awt.event.*;
 
@@ -46,10 +45,9 @@ public class Breakout extends GraphicsProgram {
 	/* Run loop */
 	public void run() {
 
-		// waitForClick();
+		waitForClick();
 		while (true) {
-			updateBall();
-			// updateBricks();
+			update();
 			pause(PAUSE_TIME);
 		}
 
@@ -60,24 +58,14 @@ public class Breakout extends GraphicsProgram {
 		thePaddle.setLocation(e.getX());
 	}
 
-	public void updateBricks() {
-		for (int i = 0; i < BRICKS_NUMBER_OF_ROWS; i++) {
-			for (int ii = 0; ii < BRICKS_PER_ROW; ii++) {
-				if (!theBricks[i][ii].isAlive()) {
-					remove(theBricks[i][ii].getShape());
-				}
-			}
-		}
-	}
-
-	public void updateBall() {
+	public void update() {
 		// System.out.println(thePaddle.getXpos());
 
 		// System.out.println(theBall);
 		theBall.updatePosition();
 
 		// Check horizontal edges
-		if (theBall.getXpos() > getWidth() - theBall.getWidth()
+		if (theBall.getXpos() > getWidth() - (theBall.getWidth() / 2)
 				|| theBall.getXpos() < 0) {
 			theBall.bounceX();
 		}
