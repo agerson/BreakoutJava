@@ -42,7 +42,7 @@ public class Breakout extends GraphicsProgram {
 
 		for (int i = 0; i < BRICKS_NUMBER_OF_ROWS; i++) {
 			for (int ii = 0; ii < BRICKS_PER_ROW; ii++) {
-				theBricks[i][ii] = new Brick((62 * ii) + 1, (20 * i) + 5,
+				theBricks[i][ii] = new Brick((62 * ii) + 1, (40 * i) + 5,
 						getColorForBricks(i));
 				add(theBricks[i][ii].getShape());
 			}
@@ -58,6 +58,10 @@ public class Breakout extends GraphicsProgram {
 		double texty = (getHeight() + msgText.getAscent()) / 2;
 		msgText.setColor(Color.blue);
 		add(msgText, textx, texty);
+	}
+	
+	public void gameOver() {
+		msgText.setLabel("Game Over");
 	}
 	
 	/* Run loop */
@@ -92,7 +96,7 @@ public class Breakout extends GraphicsProgram {
 
 		// Check for game over
 		if (theBall.getYpos() > getHeight()) {
-			// TO DO: game over
+			gameOver();
 		}
 
 		// Check paddle
