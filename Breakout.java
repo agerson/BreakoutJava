@@ -7,21 +7,29 @@
  */
 
 import acm.program.*;
+import acm.graphics.GLabel;
 import java.awt.Color;
 import java.awt.event.*;
+import java.awt.Font;
 
 /** This class is the main class of the game. */
 public class Breakout extends GraphicsProgram {
-
+	/** Width of the game display */
+	private static final int WIDTH = 622;
+	/** Height of the game display */
+	private static final int HEIGHT = 600;
+	
 	private static final int PAUSE_TIME = 15;
 
-	private static final int BRICKS_PER_ROW = 11;
+	private static final int BRICKS_PER_ROW = 10;
 	private static final int BRICKS_NUMBER_OF_ROWS = 4;
 
 	private Paddle thePaddle;
 	private Ball theBall;
 	private Brick[][] theBricks = new Brick[BRICKS_NUMBER_OF_ROWS][BRICKS_PER_ROW];
-
+	
+	GLabel msgText;
+	
 	boolean gameOver = false;
 
 	/* Initializes the program */
@@ -39,13 +47,23 @@ public class Breakout extends GraphicsProgram {
 				add(theBricks[i][ii].getShape());
 			}
 		}
+		newGame();
 		addMouseListeners();
 	}
 
+	public void newGame() {
+		msgText = new GLabel("Click to start");
+		msgText.setFont(new Font("Serif", Font.BOLD, 30));
+		double textx = (getWidth() - msgText.getWidth()) / 2;
+		double texty = (getHeight() + msgText.getAscent()) / 2;
+		msgText.setColor(Color.blue);
+		add(msgText, textx, texty);
+	}
+	
 	/* Run loop */
 	public void run() {
-
 		waitForClick();
+		msgText.setLabel("");
 		while (true) {
 			update();
 			pause(PAUSE_TIME);
@@ -59,9 +77,6 @@ public class Breakout extends GraphicsProgram {
 	}
 
 	public void update() {
-		// System.out.println(thePaddle.getXpos());
-
-		// System.out.println(theBall);
 		theBall.updatePosition();
 
 		// Check horizontal edges
